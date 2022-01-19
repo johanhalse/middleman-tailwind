@@ -10,7 +10,7 @@ module Middleman
     class Main < Middleman::Extension
       def ready
         Thread.new do
-          system("tailwindcss-linux-x64", out: $stdout)
+          system("which tailwindcss-linux-x64", out: $stdout)
         end
       end
     end
