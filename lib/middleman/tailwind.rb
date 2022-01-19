@@ -48,9 +48,14 @@ module Middleman
 
       def ready
         exe = File.join(@gem_dir, "exe/#{executable}")
-        cmd = "#{exe} -c #{config_file} -i #{application_css} -o #{destination} -w"
+        cmd = "#{exe} -c #{config_file} -i #{application_css} -o #{destination}"
 
-        Thread.new do
+        if app.mode?(:server)
+          Thread.new do
+            system("#{cmd} -w", out: $stdout)
+          end
+        else
+          puts "Building Tailwind CSS..."
           system(cmd, out: $stdout)
         end
       end
