@@ -6,9 +6,9 @@ Gem::Specification.new do |spec|
   spec.authors = ["Johan Halse"]
   spec.email = ["johan@hal.se"]
 
-  spec.summary = "Snummary"
-  spec.description = "Defscription"
-  spec.homepage = "https://example.com"
+  spec.summary = "The easiest way to get Tailwind CSS in your Middleman project"
+  spec.description = "A Middleman extension that comes bundled with standalone executables, no configuration needed."
+  spec.homepage = "https://github.com/johanhalse/middleman-tailwind"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
