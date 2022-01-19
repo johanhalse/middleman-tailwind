@@ -1,8 +1,6 @@
-# Middleman::Tailwind
+# Tailwind for Middleman
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/middleman/tailwind`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Probably the easiest way to get [Tailwind CSS](https://tailwindcss.com/) into your Middleman app! It comes bundled with the standalone CLI executables and is very point-and-shoot, no npm or external pipelines needed.
 
 ## Installation
 
@@ -14,15 +12,45 @@ gem 'middleman-tailwind'
 
 And then execute:
 
-    $ bundle install
+$ bundle install
 
 Or install it yourself as:
 
-    $ gem install middleman-tailwind
+$ gem install middleman-tailwind
 
 ## Usage
 
-TODO: Write usage instructions here
+If you don't have any special configuration needs, things should just work out of the box if you activate the extension in your `config.rb`:
+
+```ruby
+activate :tailwind
+```
+
+When you start your middleman server, a thread will spin up with the tailwind CLI in `watch` mode, watching for changes in all the `.erb` files under your `source` directory. The default path for your generated tailwind CSS file is `source/stylesheets/tailwind.css`, but you can change that with a configuration option:
+
+```ruby
+activate :tailwind do |config|
+  config.destination_path = "source/stylesheets/another-filename.css"
+end
+```
+
+You might want to customize your tailwind.config.js. Tell middleman-tailwind where to find it with the following config option and it'll pick that up.
+
+```ruby
+activate :tailwind do |config|
+  config.config_path = "tailwind.config.js"
+end
+```
+
+In the same vein, you can customize the application css that tailwind uses, like so:
+
+```ruby
+activate :tailwind do |config|
+  config.css_path = "tailwind/application.tailwind.css"
+end
+```
+
+That's all. GLHF!
 
 ## Development
 
