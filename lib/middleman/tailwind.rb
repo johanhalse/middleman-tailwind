@@ -1,5 +1,4 @@
 require "middleman-core"
-require "pry"
 require_relative "tailwind/version"
 require_relative "tailwind/upstream"
 
