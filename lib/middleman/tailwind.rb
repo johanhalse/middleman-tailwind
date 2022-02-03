@@ -45,17 +45,25 @@ module Middleman
         File.join(@gem_dir, "tailwind/tailwind.config.js")
       end
 
+      def after_configuration
+        exe = File.join(@gem_dir, "exe/#{executable}")
+        cmd = "#{exe} -c #{config_file} -i #{application_css} -o #{destination}"
+
+        return if app.mode?(:server)
+
+        puts "Building Tailwind CSS..."
+        system(cmd, out: $stdout)
+      end
+
       def ready
         exe = File.join(@gem_dir, "exe/#{executable}")
         cmd = "#{exe} -c #{config_file} -i #{application_css} -o #{destination}"
 
-        if app.mode?(:server)
-          Thread.new do
-            system("#{cmd} -w", out: $stdout)
-          end
-        else
-          puts "Building Tailwind CSS..."
-          system(cmd, out: $stdout)
+        return unless app.mode?(:server)
+
+        puts "Building Tailwind CSS..."
+        Thread.new do
+          system("#{cmd} -w", out: $stdout)
         end
       end
     end
